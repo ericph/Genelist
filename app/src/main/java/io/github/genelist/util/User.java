@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
+import io.github.genelist.listitems.GeneListItem;
 import io.github.genelist.listitems.MusicArtist;
 import io.github.genelist.lists.GeneList;
 import io.github.genelist.R;
@@ -21,6 +22,7 @@ public class User {
     public static User getInstance() { return SingletonHelper.INSTANCE; }
 
     public String username = "";
+    public GeneList<GeneListItem> masterList = new GeneList<>();
     public GeneList<MusicArtist> musicArtistList = new GeneList<>();
 
     public boolean readSaveData(Context context) {
@@ -55,6 +57,7 @@ public class User {
         } catch (Exception e) {
             Toast.makeText(context, R.string.read_save_data_error, Toast.LENGTH_SHORT).show();
             username = "";
+            masterList = new GeneList<>();
             musicArtistList = new GeneList<>();
             return false;
         } finally {
