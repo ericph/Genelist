@@ -10,6 +10,7 @@ import io.github.genelist.listitems.ListItem;
 public class GeneList<K extends ListItem> extends ArrayList<K>{
     public static final int MAX_SIZE = 5;
 
+    private long id;
     private Context context;
 
     public GeneList() {
@@ -54,6 +55,8 @@ public class GeneList<K extends ListItem> extends ArrayList<K>{
         if (context != null)
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
+
+    public long getId() { return id; }
 
     public K _1() { return get(0); }
     public K _2() { return get(1); }
