@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import io.github.genelist.listitems.ListItem;
 
@@ -20,6 +21,11 @@ public class GeneList<K extends ListItem> extends ArrayList<K>{
     public GeneList(Context context) {
         super(MAX_SIZE);
         this.context = context;
+    }
+
+    public GeneList(K... items) {
+        super(MAX_SIZE);
+        Collections.addAll(this, items);
     }
 
     @Override
