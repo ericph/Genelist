@@ -1,38 +1,34 @@
 package io.github.genelist.lists;
 
-import android.content.Context;
-import android.widget.Toast;
+import android.content.res.Resources;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
+import io.github.genelist.R;
 import io.github.genelist.listitems.ListItem;
+import io.github.genelist.util.Constants;
 
 public class GeneList<K extends ListItem> extends ArrayList<K>{
     public static final int MAX_SIZE = 5;
-
-    private long id;
-    private Context context;
 
     public GeneList() {
         super(MAX_SIZE);
     }
 
-    public GeneList(Context context) {
-        super(MAX_SIZE);
-        this.context = context;
-    }
-
     public GeneList(K... items) {
         super(MAX_SIZE);
-        Collections.addAll(this, items);
+        if (items.length <= MAX_SIZE)
+            Collections.addAll(this, items);
+        else
+            warn(R.string.err_full_list);
     }
 
     @Override
     public boolean add(K item) {
         if (size() < MAX_SIZE)
             return super.add(item);
-        warn("Cannot add to a full list!");
+        warn(R.string.err_full_list);
         return false;
     }
 
@@ -40,7 +36,7 @@ public class GeneList<K extends ListItem> extends ArrayList<K>{
     public void add(int index, K item) {
         if (size() < MAX_SIZE)
             super.add(index, item);
-        warn("Cannot add to a full list!");
+        warn(R.string.err_full_list);
     }
 
     public boolean reorder(int itemIndex, int destIndex) {
@@ -53,16 +49,18 @@ public class GeneList<K extends ListItem> extends ArrayList<K>{
     private boolean validateIndex(int index) {
         if (index >= 0 && index < MAX_SIZE)
             return true;
-        warn("Invalid list index!");
+        warn(R.string.err_list_index);
         return false;
     }
 
-    private void warn(String msg) {
-        if (context != null)
-            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+    private void warn(int msgVal) {
+        String msg = Resources.getSystem().getString(msgVal);
+        // TODO: trigger some sort of warning based on the given msg
     }
 
-    public long getId() { return id; }
+    public long getId() {
+        return Constants.LIST_ID_MAP.get(getClass().getComponentType());
+    }
 
     public K _1() { return get(0); }
     public K _2() { return get(1); }
