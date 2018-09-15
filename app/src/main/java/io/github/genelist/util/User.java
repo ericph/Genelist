@@ -55,7 +55,7 @@ public class User {
             isr.close();
             fis.close();
         } catch (Exception e) {
-            Toast.makeText(context, R.string.read_save_data_error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.err_read_data, Toast.LENGTH_SHORT).show();
             username = "";
             masterList = new GeneList<>();
             musicArtistList = new GeneList<>();
@@ -69,7 +69,7 @@ public class User {
                 if (fis != null)
                     fis.close();
             } catch (IOException e) {
-                Toast.makeText(context, R.string.io_close_error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.err_io_close, Toast.LENGTH_SHORT).show();
             }
         }
         return true;
@@ -97,7 +97,7 @@ public class User {
             osw.flush(); osw.close();
             fos.flush(); fos.close();
         } catch (IOException e) {
-            Toast.makeText(context, R.string.write_save_data_error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.err_write_data, Toast.LENGTH_SHORT).show();
         } finally {
             try {
                 if (osw != null) {
@@ -107,7 +107,7 @@ public class User {
                     fos.flush(); fos.close();
                 }
             } catch (IOException e) {
-                Toast.makeText(context, R.string.io_close_error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.err_io_close, Toast.LENGTH_SHORT).show();
             }
         }
     }
