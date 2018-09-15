@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Genelist</string>
+
+    <!-- GeneList -->
+    <string name="err_full_list">Cannot add to a full list!</string>
+    <string name="err_list_index">Invalid list index!</string>
+
+    <!-- User -->
+    <string name="err_io_close">Error closing I/O objects</string>
+    <string name="err_write_data">Error saving app data to internal storage</string>
+    <string name="err_read_data">Error loading app data from internal storage</string>
+
+    <!-- HomeActivity -->
+
+
+    <!-- ProfileActivity -->
+
+
+    <!-- MusicArtistActivity -->
+    <string name="MusicArtistListActivity">MusicArtistList</string>
+</resources>
