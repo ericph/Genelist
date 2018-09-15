@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import io.github.genelist.R;
 import io.github.genelist.listitems.MusicArtist;
-import io.github.genelist.lists.GeneList;
 import io.github.genelist.util.GenDragItemAdapter;
 import io.github.genelist.util.User;
 
