@@ -10,12 +10,13 @@ import io.github.genelist.listitems.ListItem;
 import io.github.genelist.util.Constants;
 
 public class GeneList<K extends ListItem> extends ArrayList<K>{
-    public static final int MAX_SIZE = 5;
+    private static final int MAX_SIZE = 5;
 
     public GeneList() {
         super(MAX_SIZE);
     }
 
+    @SafeVarargs
     public GeneList(K... items) {
         super(MAX_SIZE);
         if (items.length <= MAX_SIZE)
