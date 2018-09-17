@@ -32,4 +32,7 @@ dependencies {
 
     // DragListView
     implementation 'com.github.woxthebox:draglistview:1.6.2'
+
+    // lastfm-java
+    implementation 'de.u-mass:lastfm-java:0.1.2'
 }
