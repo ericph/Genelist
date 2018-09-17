@@ -1,15 +1,16 @@
 package io.github.genelist.lists;
 
-import android.content.res.Resources;
-
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Logger;
 
 import io.github.genelist.R;
 import io.github.genelist.listitems.ListItem;
 import io.github.genelist.util.Constants;
+import io.github.genelist.util.Util;
 
 public class GeneList<K extends ListItem> extends ArrayList<K>{
+    private static final Logger LOG = Logger.getLogger("io.github.genelist.lists.GeneList");
     private static final int MAX_SIZE = 5;
 
     public GeneList() {
@@ -22,14 +23,14 @@ public class GeneList<K extends ListItem> extends ArrayList<K>{
         if (items.length <= MAX_SIZE)
             Collections.addAll(this, items);
         else
-            warn(R.string.err_full_list);
+            Util.warn(LOG, R.string.err_full_list);
     }
 
     @Override
     public boolean add(K item) {
         if (size() < MAX_SIZE)
             return super.add(item);
-        warn(R.string.err_full_list);
+        Util.warn(LOG, R.string.err_full_list);
         return false;
     }
 
@@ -37,7 +38,7 @@ public class GeneList<K extends ListItem> extends ArrayList<K>{
     public void add(int index, K item) {
         if (size() < MAX_SIZE)
             super.add(index, item);
-        warn(R.string.err_full_list);
+        Util.warn(LOG, R.string.err_full_list);
     }
 
     public boolean reorder(int itemIndex, int destIndex) {
@@ -50,13 +51,8 @@ public class GeneList<K extends ListItem> extends ArrayList<K>{
     private boolean validateIndex(int index) {
         if (index >= 0 && index < MAX_SIZE)
             return true;
-        warn(R.string.err_list_index);
+        Util.warn(LOG, R.string.err_list_index);
         return false;
-    }
-
-    private void warn(int msgVal) {
-        String msg = Resources.getSystem().getString(msgVal);
-        // TODO: trigger some sort of warning based on the given msg
     }
 
     public long getId() {

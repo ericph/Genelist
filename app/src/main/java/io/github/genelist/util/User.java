@@ -1,7 +1,6 @@
 package io.github.genelist.util;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.logging.Logger;
 
 import io.github.genelist.listitems.GeneListItem;
 import io.github.genelist.listitems.MusicArtist;
@@ -20,6 +20,8 @@ public class User {
     private User(){}
     private static class SingletonHelper { private static final User INSTANCE = new User(); }
     public static User getInstance() { return SingletonHelper.INSTANCE; }
+
+    private static final Logger LOG = Logger.getLogger("io.github.genelist.util.User");
 
     public String username = "";
     public GeneList<GeneListItem> masterList = new GeneList<>();
@@ -55,7 +57,7 @@ public class User {
             isr.close();
             fis.close();
         } catch (Exception e) {
-            Toast.makeText(context, R.string.err_read_data, Toast.LENGTH_SHORT).show();
+            Util.warn(LOG, R.string.err_read_data);
             username = "";
             masterList = new GeneList<>();
             musicArtistList = new GeneList<>();
@@ -69,7 +71,7 @@ public class User {
                 if (fis != null)
                     fis.close();
             } catch (IOException e) {
-                Toast.makeText(context, R.string.err_io_close, Toast.LENGTH_SHORT).show();
+                Util.warn(LOG, R.string.err_io_close);
             }
         }
         return true;
@@ -97,7 +99,7 @@ public class User {
             osw.flush(); osw.close();
             fos.flush(); fos.close();
         } catch (IOException e) {
-            Toast.makeText(context, R.string.err_write_data, Toast.LENGTH_SHORT).show();
+            Util.warn(LOG, R.string.err_write_data);
         } finally {
             try {
                 if (osw != null) {
@@ -107,7 +109,7 @@ public class User {
                     fos.flush(); fos.close();
                 }
             } catch (IOException e) {
-                Toast.makeText(context, R.string.err_io_close, Toast.LENGTH_SHORT).show();
+                Util.warn(LOG, R.string.err_io_close);
             }
         }
     }
