@@ -50,7 +50,7 @@ public class User {
             br = new BufferedReader(isr);
             nextLine = br.readLine();
             while (nextLine != null && !nextLine.equals("")) {
-                musicArtistList.add(MusicArtist.getById(Long.parseLong(nextLine)));
+                musicArtistList.add(MusicArtist.getById(nextLine));
                 nextLine = br.readLine();
             }
             br.close();
