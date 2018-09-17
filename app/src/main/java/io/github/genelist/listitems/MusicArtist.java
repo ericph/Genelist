@@ -64,8 +64,19 @@ public class MusicArtist extends ListItem {
     @Override
     public String getId() { return id; }
 
+    @Override
+    public long getLongId() {
+        StringBuilder newId = new StringBuilder();
+        String[] parts = id.split("-");
+        for (String part : parts) {
+            newId.append(Long.decode("0x" + part));
+        }
+        return Long.parseLong(newId.toString());
+    }
+
     public String getName() { return name; }
 
+    @Override
     public ImageItem getImage() { return image; }
 
     public Artist getArtist() { return artist; }

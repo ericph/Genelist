@@ -15,5 +15,8 @@ public class GeneListItem extends ListItem {
     @Override
     public String getId() { return id; }
 
+    @Override
+    public long getLongId() { return Long.parseLong(id); }
+
     public GeneList getList() { return list; }
 }

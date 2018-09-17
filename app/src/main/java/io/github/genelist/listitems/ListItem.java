@@ -1,5 +1,7 @@
 package io.github.genelist.listitems;
 
+import io.github.genelist.util.ImageItem;
+
 public abstract class ListItem {
     public static final String DEFAULT_ID = "";
 
@@ -10,4 +12,8 @@ public abstract class ListItem {
     }
 
     public abstract String getId();
+
+    public abstract long getLongId();
+
+    public ImageItem getImage() { return new ImageItem(); }
 }

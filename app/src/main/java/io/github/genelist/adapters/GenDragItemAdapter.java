@@ -40,7 +40,7 @@ public class GenDragItemAdapter<K extends ListItem> extends DragItemAdapter<K, G
     @Override
     public long getUniqueItemId(int position) {
         K item = mItemList.get(position);
-        return item.exists ? item.getId() : ListItem.DEFAULT_ID;
+        return item.exists ? item.getLongId() : -1;
     }
 
     class ViewHolder extends DragItemAdapter.ViewHolder {
