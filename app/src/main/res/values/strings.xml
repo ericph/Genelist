@@ -10,6 +10,9 @@
     <string name="err_write_data">Error saving app data to internal storage</string>
     <string name="err_read_data">Error loading app data from internal storage</string>
 
+    <!-- DownloadImageTask -->
+    <string name="err_download_image">Error downloading image</string>
+
     <!-- HomeActivity -->
 
 
