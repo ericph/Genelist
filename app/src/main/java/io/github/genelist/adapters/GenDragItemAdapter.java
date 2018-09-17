@@ -1,4 +1,4 @@
-package io.github.genelist.util;
+package io.github.genelist.adapters;
 
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
