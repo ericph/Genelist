@@ -36,7 +36,7 @@ public class MusicArtist extends ListItem {
     public static MusicArtist getById(String id) {
         try {
             Artist a = Artist.getInfo(id, Locale.US, null, Constants.LASTFM_API_KEY);
-            return new MusicArtist(a.getMbid(), a.getName(), new ImageItem(), a);
+            return new MusicArtist(a.getMbid(), a.getName(), ImageItem.fromArtist(a), a);
         } catch (Exception e) {
             return new MusicArtist();
         }
@@ -45,7 +45,7 @@ public class MusicArtist extends ListItem {
     public static MusicArtist getByName(String name) {
         try {
             Artist a = Artist.getInfo(name, Locale.US, null, Constants.LASTFM_API_KEY);
-            return new MusicArtist(a.getMbid(), a.getName(), new ImageItem(), a);
+            return new MusicArtist(a.getMbid(), a.getName(), ImageItem.fromArtist(a), a);
         } catch (Exception e) {
             return new MusicArtist();
         }
@@ -56,9 +56,9 @@ public class MusicArtist extends ListItem {
         return similar.stream().map(MusicArtist::fromArtist).collect(Collectors.toList());
     }
 
-    private static MusicArtist fromArtist(Artist a) {
-        return new MusicArtist(a.getMbid(), a.getName(), new ImageItem(),
-                Artist.getInfo(a.getMbid(), Locale.US, null, Constants.LASTFM_API_KEY));
+    private static MusicArtist fromArtist(Artist artist) {
+        Artist a = Artist.getInfo(artist.getMbid(), Locale.US, null, Constants.LASTFM_API_KEY);
+        return new MusicArtist(a.getMbid(), a.getName(), ImageItem.fromArtist(a), a);
     }
 
     @Override
