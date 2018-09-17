@@ -31,7 +31,6 @@ public class GenDragItemAdapter<K extends ListItem> extends DragItemAdapter<K, G
         return new ViewHolder(view);
     }
 
-    @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         holder.itemView.setTag(mItemList.get(position));
