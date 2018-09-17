@@ -1,7 +1,7 @@
 package io.github.genelist.listitems;
 
 public abstract class ListItem {
-    public static final long DEFAULT_ID = -1;
+    public static final String DEFAULT_ID = "";
 
     public boolean exists;
 
@@ -9,5 +9,5 @@ public abstract class ListItem {
         exists = false;
     }
 
-    public abstract long getId();
+    public abstract String getId();
 }

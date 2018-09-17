@@ -55,7 +55,7 @@ public class GeneList<K extends ListItem> extends ArrayList<K>{
         return false;
     }
 
-    public long getId() {
+    public String getId() {
         return Constants.LIST_ID_MAP.get(getClass().getComponentType());
     }
 
