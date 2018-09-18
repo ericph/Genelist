@@ -1,5 +1,7 @@
 package io.github.genelist.lists;
 
+import android.graphics.drawable.VectorDrawable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Logger;
@@ -12,6 +14,8 @@ import io.github.genelist.util.Util;
 public class GeneList<K extends ListItem> extends ArrayList<K>{
     private static final Logger LOG = Logger.getLogger("io.github.genelist.lists.GeneList");
     private static final int MAX_SIZE = 5;
+
+    private VectorDrawable icon;
 
     public GeneList() {
         super(MAX_SIZE);
@@ -55,9 +59,13 @@ public class GeneList<K extends ListItem> extends ArrayList<K>{
         return false;
     }
 
+    public void setIcon(VectorDrawable icon) { this.icon = icon; }
+
     public String getId() {
         return Constants.LIST_ID_MAP.get(getClass().getComponentType());
     }
+
+    public VectorDrawable getIcon() { return icon; }
 
     public K _1() { return get(0); }
     public K _2() { return get(1); }
