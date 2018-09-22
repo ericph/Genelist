@@ -14,9 +14,22 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        User.getInstance().readSaveData(getApplicationContext());
+
         ImageView ye = findViewById(R.id.yeImageView);
 
-        User.getInstance().readSaveData(getApplicationContext());
+        createListFragments(savedInstanceState);
+    }
+
+    private void createListFragments(Bundle savedInstanceState) {
+        if (findViewById(R.id.list_fragment) != null) {
+            if (savedInstanceState != null)
+                return;
+            MusicArtistListFragment malFragment = new MusicArtistListFragment();
+            malFragment.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.list_fragment, malFragment).commit();
+        }
     }
 
 }
