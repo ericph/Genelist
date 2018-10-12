@@ -1,4 +1,4 @@
-package io.github.genelist.lists;
+package io.github.genelist.base;
 
 import android.graphics.drawable.VectorDrawable;
 
@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.logging.Logger;
 
 import io.github.genelist.R;
-import io.github.genelist.listitems.ListItem;
 import io.github.genelist.util.Constants;
 import io.github.genelist.util.Util;
 

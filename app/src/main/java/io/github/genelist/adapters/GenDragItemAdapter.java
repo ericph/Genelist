@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.woxthebox.draglistview.DragItemAdapter;
 
-import io.github.genelist.listitems.ListItem;
+import io.github.genelist.base.ListItem;
 
 import java.util.ArrayList;
 

@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 
 import io.github.genelist.R;
 import io.github.genelist.adapters.ListItemAdapter;
-import io.github.genelist.listitems.ListItem;
-import io.github.genelist.lists.GeneList;
+import io.github.genelist.base.ListItem;
+import io.github.genelist.base.GeneList;
 
 /**
  * A fragment representing a GeneList of ListItems

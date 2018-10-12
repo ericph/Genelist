@@ -3,7 +3,8 @@ package io.github.genelist.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.github.genelist.listitems.*;
+import io.github.genelist.listitems.GeneListItem;
+import io.github.genelist.listitems.MusicArtist;
 
 public class Constants {
     public static final Map<Class, String> LIST_ID_MAP;

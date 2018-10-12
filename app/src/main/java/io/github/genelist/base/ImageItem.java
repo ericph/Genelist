@@ -1,4 +1,4 @@
-package io.github.genelist.util;
+package io.github.genelist.base;
 
 import de.umass.lastfm.Artist;
 import de.umass.lastfm.ImageSize;

@@ -12,8 +12,8 @@ import com.bumptech.glide.Glide;
 import java.util.logging.Logger;
 
 import io.github.genelist.R;
-import io.github.genelist.listitems.ListItem;
-import io.github.genelist.lists.GeneList;
+import io.github.genelist.base.ListItem;
+import io.github.genelist.base.GeneList;
 import io.github.genelist.ui.GeneListFragment.OnListFragmentInteractionListener;
 
 /**

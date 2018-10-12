@@ -8,8 +8,9 @@ import java.util.stream.Collectors;
 import de.umass.lastfm.Caller;
 import de.umass.lastfm.Artist;
 
+import io.github.genelist.base.ListItem;
 import io.github.genelist.util.Constants;
-import io.github.genelist.util.ImageItem;
+import io.github.genelist.base.ImageItem;
 
 public class MusicArtist extends ListItem {
     private String id = ListItem.DEFAULT_ID;

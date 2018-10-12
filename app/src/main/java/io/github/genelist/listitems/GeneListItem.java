@@ -1,6 +1,7 @@
 package io.github.genelist.listitems;
 
-import io.github.genelist.lists.GeneList;
+import io.github.genelist.base.GeneList;
+import io.github.genelist.base.ListItem;
 
 public class GeneListItem extends ListItem {
     private String id;
