@@ -2,6 +2,7 @@ package io.github.genelist.ui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,10 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.woxthebox.draglistview.DragListView;
+
 import io.github.genelist.R;
+import io.github.genelist.adapters.GenDragItemAdapter;
 import io.github.genelist.adapters.ListItemAdapter;
 import io.github.genelist.base.ListItem;
 import io.github.genelist.base.GeneList;
+import io.github.genelist.listitems.MusicArtist;
+import io.github.genelist.util.User;
 
 /**
  * A fragment representing a GeneList of ListItems
@@ -47,7 +53,7 @@ public class GeneListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_gene_list, container, false);
 
         if (view instanceof RecyclerView) {
@@ -58,7 +64,6 @@ public class GeneListFragment extends Fragment {
         }
         return view;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -77,11 +82,33 @@ public class GeneListFragment extends Fragment {
         olfiListener = null;
     }
 
+    private void setDragListView() {
+        DragListView dlView = getActivity().findViewById(R.id.drag_item_recycler_view);
+        dlView.setDragListListener(new DragListView.DragListListener() {
+            @Override
+            public void onItemDragStarted(int pos) {}
+
+            @Override
+            public void onItemDragEnded(int startPos, int endPos) {
+                if (startPos == endPos)
+                    return;
+                // reorder list
+            }
+
+            @Override
+            public void onItemDragging(int a, float b, float c) {}
+        });
+        dlView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        GenDragItemAdapter<MusicArtist> maListAdapter = new GenDragItemAdapter<>(
+                User.getInstance().musicArtistList, R.layout.music_artist_item, R.id.image, false);
+        dlView.setAdapter(maListAdapter, false);
+        dlView.setCanDragHorizontally(false);
+    }
+
     /**
      * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
+     * fragment to allow an interaction in this fragment to be communicated to
+     * the activity and potentially other fragments contained in that activity.
      * http://developer.android.com/training/basics/fragments/communicating.html
      */
     public interface OnListFragmentInteractionListener {
