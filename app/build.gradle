@@ -42,4 +42,11 @@ dependencies {
 
     // DragListView
     implementation 'com.github.woxthebox:draglistview:1.6.2'
+
+    // Jackson
+    implementation (
+            [group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.7'],
+            [group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.7'],
+            [group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7']
+    )
 }
