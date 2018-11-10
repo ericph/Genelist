@@ -7,10 +7,12 @@ import java.util.stream.Collectors;
 
 import de.umass.lastfm.Caller;
 import de.umass.lastfm.Artist;
+import de.umass.lastfm.ImageSize;
 
 import io.github.genelist.base.ListItem;
 import io.github.genelist.util.Constants;
 import io.github.genelist.base.ImageItem;
+import io.github.genelist.util.Util;
 
 public class Musician extends ListItem {
     private String id = ListItem.DEFAULT_ID;
@@ -37,7 +39,8 @@ public class Musician extends ListItem {
     public static Musician getById(String id) {
         try {
             Artist a = Artist.getInfo(id, Locale.US, null, Constants.LASTFM_API_KEY);
-            return new Musician(a.getMbid(), a.getName(), ImageItem.fromArtist(a), a);
+            ImageItem image = new ImageItem(a.getImageURL(ImageSize.SMALL));
+            return new Musician(a.getMbid(), a.getName(), image, a);
         } catch (Exception e) {
             return new Musician();
         }
@@ -46,7 +49,8 @@ public class Musician extends ListItem {
     public static Musician getByName(String name) {
         try {
             Artist a = Artist.getInfo(name, Locale.US, null, Constants.LASTFM_API_KEY);
-            return new Musician(a.getMbid(), a.getName(), ImageItem.fromArtist(a), a);
+            ImageItem image = new ImageItem(a.getImageURL(ImageSize.SMALL));
+            return new Musician(a.getMbid(), a.getName(), image, a);
         } catch (Exception e) {
             return new Musician();
         }
@@ -59,21 +63,15 @@ public class Musician extends ListItem {
 
     private static Musician fromArtist(Artist artist) {
         Artist a = Artist.getInfo(artist.getMbid(), Locale.US, null, Constants.LASTFM_API_KEY);
-        return new Musician(a.getMbid(), a.getName(), ImageItem.fromArtist(a), a);
+        ImageItem image = new ImageItem(a.getImageURL(ImageSize.SMALL));
+        return new Musician(a.getMbid(), a.getName(), image, a);
     }
 
     @Override
     public String getId() { return id; }
 
     @Override
-    public long getLongId() {
-        StringBuilder newId = new StringBuilder();
-        String[] parts = id.split("-");
-        for (String part : parts) {
-            newId.append(Long.decode("0x" + part));
-        }
-        return Long.parseLong(newId.toString());
-    }
+    public long getLongId() { return Util.mbidToLong(id); }
 
     public String getName() { return name; }
 
