@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 
 import io.github.genelist.R;
 
-public class MusicArtistListFragment extends Fragment {
+public class MusicianListFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.music_artist_list, container, false);
+        return inflater.inflate(R.layout.musician_list, container, false);
     }
 }

@@ -12,15 +12,15 @@ import io.github.genelist.base.ListItem;
 import io.github.genelist.util.Constants;
 import io.github.genelist.base.ImageItem;
 
-public class MusicArtist extends ListItem {
+public class Musician extends ListItem {
     private String id = ListItem.DEFAULT_ID;
     private String name = "";
     private ImageItem image = new ImageItem();
     private Artist artist;
 
-    public MusicArtist() { super(); }
+    public Musician() { super(); }
 
-    public MusicArtist(String id, String name, ImageItem image, Artist artist) {
+    public Musician(String id, String name, ImageItem image, Artist artist) {
         exists = true;
         this.id = id;
         this.name = name;
@@ -29,37 +29,37 @@ public class MusicArtist extends ListItem {
         Caller.getInstance().setUserAgent(Constants.LASTFM_USER);
     }
 
-    public static List<MusicArtist> search(String name) {
+    public static List<Musician> search(String name) {
         List<Artist> artists = new ArrayList<>(Artist.search(name, Constants.LASTFM_API_KEY));
-        return artists.stream().map(MusicArtist::fromArtist).collect(Collectors.toList());
+        return artists.stream().map(Musician::fromArtist).collect(Collectors.toList());
     }
 
-    public static MusicArtist getById(String id) {
+    public static Musician getById(String id) {
         try {
             Artist a = Artist.getInfo(id, Locale.US, null, Constants.LASTFM_API_KEY);
-            return new MusicArtist(a.getMbid(), a.getName(), ImageItem.fromArtist(a), a);
+            return new Musician(a.getMbid(), a.getName(), ImageItem.fromArtist(a), a);
         } catch (Exception e) {
-            return new MusicArtist();
+            return new Musician();
         }
     }
 
-    public static MusicArtist getByName(String name) {
+    public static Musician getByName(String name) {
         try {
             Artist a = Artist.getInfo(name, Locale.US, null, Constants.LASTFM_API_KEY);
-            return new MusicArtist(a.getMbid(), a.getName(), ImageItem.fromArtist(a), a);
+            return new Musician(a.getMbid(), a.getName(), ImageItem.fromArtist(a), a);
         } catch (Exception e) {
-            return new MusicArtist();
+            return new Musician();
         }
     }
 
-    public List<MusicArtist> getSimilar() {
+    public List<Musician> getSimilar() {
         List<Artist> similar = new ArrayList<>(artist.getSimilar());
-        return similar.stream().map(MusicArtist::fromArtist).collect(Collectors.toList());
+        return similar.stream().map(Musician::fromArtist).collect(Collectors.toList());
     }
 
-    private static MusicArtist fromArtist(Artist artist) {
+    private static Musician fromArtist(Artist artist) {
         Artist a = Artist.getInfo(artist.getMbid(), Locale.US, null, Constants.LASTFM_API_KEY);
-        return new MusicArtist(a.getMbid(), a.getName(), ImageItem.fromArtist(a), a);
+        return new Musician(a.getMbid(), a.getName(), ImageItem.fromArtist(a), a);
     }
 
     @Override

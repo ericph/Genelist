@@ -12,7 +12,7 @@ import java.io.OutputStreamWriter;
 import java.util.logging.Logger;
 
 import io.github.genelist.listitems.GeneListItem;
-import io.github.genelist.listitems.MusicArtist;
+import io.github.genelist.listitems.Musician;
 import io.github.genelist.base.GeneList;
 import io.github.genelist.R;
 
@@ -25,7 +25,7 @@ public class User {
 
     public String username = "";
     public GeneList<GeneListItem> masterList = new GeneList<>();
-    public GeneList<MusicArtist> musicArtistList = new GeneList<>();
+    public GeneList<Musician> musicianList = new GeneList<>();
 
     public boolean readSaveData(Context context) {
         FileInputStream fis = null;
@@ -50,7 +50,7 @@ public class User {
             br = new BufferedReader(isr);
             nextLine = br.readLine();
             while (nextLine != null && !nextLine.equals("")) {
-                musicArtistList.add(MusicArtist.getById(nextLine));
+                musicianList.add(Musician.getById(nextLine));
                 nextLine = br.readLine();
             }
             br.close();
@@ -60,7 +60,7 @@ public class User {
             Util.warn(LOG, R.string.err_read_data);
             username = "";
             masterList = new GeneList<>();
-            musicArtistList = new GeneList<>();
+            musicianList = new GeneList<>();
             return false;
         } finally {
             try {
@@ -93,7 +93,7 @@ public class User {
             l1File.createNewFile(); // only creates new file if no file with filename exists
             fos = context.openFileOutput("genelistList1", Context.MODE_PRIVATE);
             osw = new OutputStreamWriter(fos);
-            for (MusicArtist item : musicArtistList) {
+            for (Musician item : musicianList) {
                 osw.write(item.getId() + "\n");
             }
             osw.flush(); osw.close();

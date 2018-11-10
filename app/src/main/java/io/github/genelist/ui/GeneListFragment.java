@@ -17,7 +17,7 @@ import io.github.genelist.adapters.GenDragItemAdapter;
 import io.github.genelist.adapters.ListItemAdapter;
 import io.github.genelist.base.ListItem;
 import io.github.genelist.base.GeneList;
-import io.github.genelist.listitems.MusicArtist;
+import io.github.genelist.listitems.Musician;
 import io.github.genelist.util.User;
 
 /**
@@ -99,9 +99,9 @@ public class GeneListFragment extends Fragment {
             public void onItemDragging(int a, float b, float c) {}
         });
         dlView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        GenDragItemAdapter<MusicArtist> maListAdapter = new GenDragItemAdapter<>(
-                User.getInstance().musicArtistList, R.layout.music_artist_item, R.id.image, false);
-        dlView.setAdapter(maListAdapter, false);
+        GenDragItemAdapter<Musician> gdiAdapter = new GenDragItemAdapter<>(
+                User.getInstance().musicianList, R.layout.musician_item, R.id.image, false);
+        dlView.setAdapter(gdiAdapter, false);
         dlView.setCanDragHorizontally(false);
     }
 

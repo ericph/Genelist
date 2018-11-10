@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.genelist.ui.MusicArtistListFragment"
+    tools:context="io.github.genelist.ui.MusicianListFragment"
     tools:showIn="@layout/activity_home">
 
     <com.woxthebox.draglistview.sample.MySwipeRefreshLayout

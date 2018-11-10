@@ -25,7 +25,7 @@ public class HomeActivity extends AppCompatActivity {
         if (findViewById(R.id.list_fragment) != null) {
             if (savedInstanceState != null)
                 return;
-            MusicArtistListFragment malFragment = new MusicArtistListFragment();
+            MusicianListFragment malFragment = new MusicianListFragment();
             malFragment.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.list_fragment, malFragment).commit();
