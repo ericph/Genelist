@@ -11,4 +11,13 @@ public abstract class Util {
         log.warning(msg);
     }
 
+    public static long mbidToLong(String mbid) {
+        StringBuilder newId = new StringBuilder();
+        String[] parts = mbid.split("-");
+        for (String part : parts) {
+            newId.append(Long.decode("0x" + part));
+        }
+        return Long.parseLong(newId.toString());
+    }
+
 }
