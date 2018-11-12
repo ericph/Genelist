@@ -5,9 +5,9 @@ import io.github.genelist.base.ListItem;
 
 public class GeneListItem extends ListItem {
     private String id;
-    private GeneList list;
+    private GeneList<ListItem> list;
 
-    public GeneListItem(GeneList list) {
+    public GeneListItem(GeneList<ListItem> list) {
         exists = true;
         this.id = list.getId();
         this.list = list;
@@ -19,5 +19,5 @@ public class GeneListItem extends ListItem {
     @Override
     public long getLongId() { return Long.parseLong(id); }
 
-    public GeneList getList() { return list; }
+    public GeneList<ListItem> getList() { return list; }
 }
