@@ -17,7 +17,7 @@ public abstract class Http {
     }
 
     public static String getRequest(String url, String headerName, String headerValue) {
-        StringBuffer sb = new StringBuffer("");
+        StringBuffer sb = new StringBuffer();
         BufferedReader br = null;
         HttpURLConnection connection = null;
         try {
