@@ -9,10 +9,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
-import io.github.genelist.listitems.GeneListItem;
-import io.github.genelist.listitems.Musician;
+import io.github.genelist.base.ListItem;
+import io.github.genelist.listitems.*;
 import io.github.genelist.base.GeneList;
 import io.github.genelist.R;
 
@@ -25,43 +27,48 @@ public class User {
 
     public String username = "";
     public GeneList<GeneListItem> masterList = new GeneList<>();
+    public GeneList<Album> albumList = new GeneList<>();
+    public GeneList<Game> gameList = new GeneList<>();
     public GeneList<Musician> musicianList = new GeneList<>();
 
     public boolean readSaveData(Context context) {
+        List<String> data = readFromFile("genelistUser", context);
+        if (data == null)
+            return false;
+        username = data.get(0);
+
+        List<String> listIds = readFromFile("genelistList0", context);
+        if (listIds == null)
+            return false;
+        masterList = new GeneList<>();
+
+        for (String listId : listIds) {
+            data = readFromFile("genelistList" + listId, context);
+            if (data == null)
+                return false;
+
+            // TODO: read list data into various GeneList objects
+        }
+        return true;
+    }
+
+    private List<String> readFromFile(String filename, Context context) {
         FileInputStream fis = null;
         InputStreamReader isr = null;
         BufferedReader br = null;
+        List<String> data = new ArrayList<>(5);
         try {
-            fis = context.openFileInput("genelistUser");
-            if (fis == null)
-                return false;
+            fis = context.openFileInput(filename);
             isr = new InputStreamReader(fis);
             br = new BufferedReader(isr);
             String nextLine = br.readLine();
-            username = nextLine == null ? "" : nextLine;
-            br.close();
-            isr.close();
-            fis.close();
-
-            fis = context.openFileInput("genelistList1");
-            if (fis == null)
-                return false;
-            isr = new InputStreamReader(fis);
-            br = new BufferedReader(isr);
-            nextLine = br.readLine();
             while (nextLine != null && !nextLine.equals("")) {
-                musicianList.add(Musician.getById(nextLine));
+                data.add(nextLine);
                 nextLine = br.readLine();
             }
-            br.close();
-            isr.close();
-            fis.close();
         } catch (Exception e) {
             Util.warn(LOG, R.string.err_read_data);
-            username = "";
-            masterList = new GeneList<>();
-            musicianList = new GeneList<>();
-            return false;
+            return null;
         } finally {
             try {
                 if (br != null)
@@ -74,39 +81,48 @@ public class User {
                 Util.warn(LOG, R.string.err_io_close);
             }
         }
-        return true;
+        return data;
     }
 
     public void writeSaveData(Context context) {
-        File uFile = context.getFileStreamPath("genelistUser");
-        File l1File = context.getFileStreamPath("genelistList1");
+        writeToFile("genelistUser", username, context);
+
+        StringBuffer listsSB = new StringBuffer();
+        StringBuffer dataSB;
+        for (GeneListItem gli : masterList) {
+            listsSB.append(gli.getId());
+            listsSB.append("\n");
+
+            dataSB = new StringBuffer();
+            for (ListItem item: gli.getList()) {
+                dataSB.append(item.getId());
+                dataSB.append("\n");
+            }
+            writeToFile("genelistList" + gli.getId(), dataSB.toString(), context);
+        }
+        writeToFile("genelistList0", listsSB.toString(), context);
+    }
+
+    private void writeToFile(String filename, String data, Context context) {
         FileOutputStream fos = null;
         OutputStreamWriter osw = null;
         try {
-            uFile.createNewFile(); // only creates new file if no file with filename exists
-            fos = context.openFileOutput("genelistUser", Context.MODE_PRIVATE);
+            // only creates new file if no file with filename exists
+            context.getFileStreamPath(filename).createNewFile();
+            fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
             osw = new OutputStreamWriter(fos);
-            osw.write(username);
-            osw.flush(); osw.close();
-            fos.flush(); fos.close();
-
-            l1File.createNewFile(); // only creates new file if no file with filename exists
-            fos = context.openFileOutput("genelistList1", Context.MODE_PRIVATE);
-            osw = new OutputStreamWriter(fos);
-            for (Musician item : musicianList) {
-                osw.write(item.getId() + "\n");
-            }
-            osw.flush(); osw.close();
-            fos.flush(); fos.close();
+            osw.write(data);
         } catch (IOException e) {
             Util.warn(LOG, R.string.err_write_data);
         } finally {
             try {
                 if (osw != null) {
-                    osw.flush(); osw.close();
+                    osw.flush();
+                    osw.close();
                 }
                 if (fos != null) {
-                    fos.flush(); fos.close();
+                    fos.flush();
+                    fos.close();
                 }
             } catch (IOException e) {
                 Util.warn(LOG, R.string.err_io_close);
@@ -115,11 +131,18 @@ public class User {
     }
 
     public void deleteSaveData(Context context) {
-        File uFile = context.getFileStreamPath("genelistUser");
-        if (uFile.exists())
-            uFile.delete();
-        File l1File = context.getFileStreamPath("genelistList1");
-        if (l1File.exists())
-            l1File.delete();
+        List<String> filenames = new ArrayList<>();
+        filenames.add("genelistUser");
+        filenames.add("genelistList0");
+        filenames.add("genelistList1");
+        filenames.add("genelistList2");
+        filenames.add("genelistList3");
+        filenames.add("genelistList4");
+        filenames.add("genelistList5");
+        for (String filename : filenames) {
+            File file = context.getFileStreamPath(filename);
+            if (file.exists())
+                file.delete();
+        }
     }
 }
