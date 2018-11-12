@@ -1,7 +1,5 @@
 package io.github.genelist.base;
 
-import io.github.genelist.base.ImageItem;
-
 public abstract class ListItem {
     public static final String DEFAULT_ID = "";
 
